@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Estoque</h1>
+        <nav>
+            <a href="{{ url_for('inicio') }}">🏠 Início</a>
+            <a href="{{ url_for('pagina_produtos') }}">📦 Produtos</a>
+            <a href="{{ url_for('pagina_vendas') }}">🛒 Vendas</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Controle de Estoque</h2>
+        <table class="tabela">
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Estoque Atual</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Arroz 5kg</td>
+                <td>8</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

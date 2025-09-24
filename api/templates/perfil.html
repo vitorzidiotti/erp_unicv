@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-nav">
+  <a href="{{ url_for('admin_dashboard') }}" class="btn btn-yellow">Voltar</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+    <div class="auth-container">
+        <h1>Meu Perfil</h1>
+
+        <form method="POST" id="perfilForm">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <!-- As variáveis `usuario.nome`, `usuario.cpf` e `usuario.email` vêm do seu backend Python -->
+                <input type="text" id="nome" name="nome" value="{{ usuario.nome }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" value="{{ usuario.cpf }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" value="{{ usuario.email }}" required>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid #eee; margin: 1.5rem 0;">
+
+            <!-- Botão que aciona o JavaScript para mostrar os campos de senha -->
+            <button type="button" id="btnAlterarSenha" class="btn btn-secondary">Alterar Senha</button>
+
+            <!-- Seção de Senha (inicialmente oculta) -->
+            <div id="camposSenha" style="display: none; margin-top: 1rem;">
+                <p style="color: #6c757d; text-align: center; font-size: 0.9rem;">Para alterar sua senha, preencha os campos abaixo.</p>
+                
+                <div class="form-group">
+                    <label for="senha_atual">Senha Atual:</label>
+                    <input type="password" id="senha_atual" name="senha_atual" placeholder="Digite sua senha atual para confirmar">
+                </div>
+
+                <div class="form-group">
+                    <label for="nova_senha">Nova Senha:</label>
+                    <input type="password" id="nova_senha" name="nova_senha" placeholder="Crie uma nova senha">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Nova Senha:</label>
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Repita a nova senha">
+                </div>
+            </div>
+
+            <!-- Botão de submissão principal -->
+            <button type="submit" class="btn-primary" style="margin-top: 1.5rem;">Salvar Alterações</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnAlterarSenha = document.getElementById('btnAlterarSenha');
+            const camposSenha = document.getElementById('camposSenha');
+            const form = document.getElementById('perfilForm');
+            const novaSenhaInput = document.getElementById('nova_senha');
+            const confirmarSenhaInput = document.getElementById('confirmar_senha');
+            
+            // Lógica para mostrar/ocultar os campos de senha
+            btnAlterarSenha.addEventListener('click', function() {
+                if (camposSenha.style.display === 'none') {
+                    // Mostra os campos
+                    camposSenha.style.display = 'block';
+                    this.textContent = 'Cancelar Alteração de Senha';
+                } else {
+                    // Oculta e limpa os campos
+                    camposSenha.style.display = 'none';
+                    this.textContent = 'Alterar Senha';
+                    novaSenhaInput.value = '';
+                    confirmarSenhaInput.value = '';
+                    document.getElementById('senha_atual').value = '';
+                }
+            });
+
+            // Validação antes de enviar o formulário
+            form.addEventListener('submit', function(event) {
+                // Só valida se os campos de senha estiverem visíveis e preenchidos
+                if (camposSenha.style.display === 'block' && novaSenhaInput.value) {
+                    if (novaSenhaInput.value !== confirmarSenhaInput.value) {
+                        alert('A "Nova Senha" e a "Confirmação" não coincidem. Por favor, verifique.');
+                        event.preventDefault(); // Impede o envio do formulário se as senhas forem diferentes
+                        confirmarSenhaInput.focus();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

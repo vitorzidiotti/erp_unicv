@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuários - Mercearia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Gerenciamento de Usuários</h1>
+    <nav>
+      <a href="{{ url_for('inicio') }}">🏠 Início</a>
+      <a href="{{ url_for('cadastro') }}">➕ Adicionar Usuário</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Lista de Usuários</h2>
+    <table class="tabela">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ações</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>João Silva</td>
+        <td>joao@email.com</td>
+        <td>
+          <a href="{{ url_for('editar_usuario', id=1) }}" class="btn">Editar</a>
+          <a href="#" class="btn">Excluir</a>
+        </td>
+      </tr>
+    </table>
+  </main>
+</body>
+</html>

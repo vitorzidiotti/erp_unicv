@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-nav">
+  <a href="{{ url_for('perfil') }}" class="btn btn-green">Meu Perfil</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+
+    <main class="main-container">
+        <div class="welcome-header">
+            <h1>Bem-vindo(a) de volta, {{ session.get('nome_usuario', 'Admin') }}!</h1>
+            <p>O que você gostaria de fazer hoje?</p>
+        </div>
+
+        <div class="action-grid">
+            <a href="{{ url_for('gerenciar_usuarios') }}" class="action-card">
+                <h2>Gerenciar Usuários</h2>
+                <p>Adicione, edite ou remova usuários do sistema.</p>
+            </a>
+            <a href="{{ url_for('gerenciar_clientes') }}" class="action-card">
+                <h2>Gerenciar Clientes</h2>
+                <p>Consulte e gerencie a sua base de clientes.</p>
+            </a>
+            <a href="{{ url_for('gerenciar_produtos') }}" class="action-card">
+                <h2>Gerenciar Produtos</h2>
+                <p>Adicione ou edite produtos do seu catálogo.</p>
+            </a>
+            <a href="{{ url_for('estoque_mov') }}" class="action-card">
+                <h2>Controle de Estoque</h2>
+                <p>Visualize o histórico e faça movimentações.</p>
+            </a>
+            <a href="{{ url_for('gerenciar_vendas') }}" class="action-card">
+                <h2>Registro de Vendas</h2>
+                <p>Gerencie o histórico e registre novas vendas.</p>
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Vendas</h1>
+        <nav>
+            <a href="{{ url_for('inicio') }}">🏠 Início</a>
+            <a href="{{ url_for('pagina_produtos') }}">📦 Produtos</a>
+            <a href="{{ url_for('pagina_estoque') }}">📊 Estoque</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Registrar Venda</h2>
+        <form method="POST" class="form-cadastro">
+            <label>Produto:</label>
+            <select name="produto" required>
+                <option>Arroz 5kg</option>
+                <option>Feijão 1kg</option>
+            </select>
+
+            <label>Quantidade:</label>
+            <input type="number" name="quantidade" required>
+
+            <button type="submit" class="btn">Registrar</button>
+        </form>
+
+        <h2>Histórico de Vendas</h2>
+        <table class="tabela">
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+                <th>Data</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Arroz 5kg</td>
+                <td>2</td>
+                <td>R$ 50,00</td>
+                <td>21/09/2025</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

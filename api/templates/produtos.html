@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Produtos</h1>
+        <nav>
+            <a href="{{ url_for('inicio') }}">🏠 Início</a>
+            <a href="{{ url_for('pagina_vendas') }}">🛒 Vendas</a>
+            <a href="{{ url_for('pagina_estoque') }}">📊 Estoque</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Cadastro de Produto</h2>
+        <form method="POST" class="form-cadastro">
+            <label>Nome:</label>
+            <input type="text" name="nome" required>
+
+            <label>Preço:</label>
+            <input type="number" step="0.01" name="preco" required>
+
+            <label>Quantidade em Estoque:</label>
+            <input type="number" name="quantidade" required>
+
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+
+        <h2>Lista de Produtos</h2>
+        <table class="tabela">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Arroz 5kg</td>
+                <td>R$ 25,00</td>
+                <td>10</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

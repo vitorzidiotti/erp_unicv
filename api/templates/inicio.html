@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Início - Mercearia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Cabeçalho semelhante ao admin -->
+    <header class="header-nav">
+  <a href="{{ url_for('perfil') }}" class="btn btn-green">Meu Perfil</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+
+    <!-- Mensagem de boas-vindas -->
+    <main class="main-container">
+        <div class="welcome-header">
+            <h1>Bem-vindo(a), {{ session.get('nome_usuario', 'Usuário') }}!</h1>
+            <p>Este é o seu painel de usuário.</p>
+        </div>
+    </main>
+</body>
+</html>

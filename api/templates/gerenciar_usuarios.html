@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-nav">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-yellow">‹ Voltar ao Painel</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+
+    <main class="main-container">
+        <h1>Gerenciar Usuários</h1>
+
+        <div class="toolbar">
+            <form class="search-form" method="GET" action="{{ url_for('gerenciar_usuarios') }}">
+                <input type="text" name="q" placeholder="Buscar usuário por nome, email ou CPF..." value="{{ request.args.get('q', '') }}">
+                <button type="submit" class="btn btn-green">Pesquisar</button>
+            </form>
+            <a href="{{ url_for('adicionar_usuario') }}" class="btn btn-green">+</a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Admin</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if usuarios %}
+                        {% for usuario in usuarios %}
+                        <tr>
+                            <td data-label="Nome">{{ usuario.nome }}</td>
+                            <td data-label="Email">{{ usuario.email }}</td>
+                            <td data-label="CPF">{{ usuario.cpf }}</td>
+                            <td data-label="Admin">{{ 'Sim' if usuario.is_admin else 'Não' }}</td>
+                            <td data-label="Ações">
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('editar_usuario', id_usuario=usuario.id_usuario) }}" class="btn btn-yellow">Editar</a>
+                                    <form action="{{ url_for('excluir_usuario', id_usuario=usuario.id_usuario) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este usuário?');">
+                                        <button type="submit" class="btn btn-red">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="no-results">
+                                Nenhum usuário encontrado.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

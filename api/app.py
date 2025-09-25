@@ -445,5 +445,5 @@ def adicionar_movimento():
 
 # --- EXECUÇÃO DO APP ---
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    port = int(os.environ.get("PORT", 5000))  # usa PORT do Render, ou 5000 local
+    app.run(host="0.0.0.0", port=port)

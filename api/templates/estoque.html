@@ -1,34 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Estoque</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>Estoque</h1>
-        <nav>
-            <a href="{{ url_for('inicio') }}">🏠 Início</a>
-            <a href="{{ url_for('pagina_produtos') }}">📦 Produtos</a>
-            <a href="{{ url_for('pagina_vendas') }}">🛒 Vendas</a>
-        </nav>
-    </header>
+{% extends "base.html" %}
 
-    <main>
-        <h2>Controle de Estoque</h2>
-        <table class="tabela">
-            <tr>
-                <th>ID</th>
-                <th>Produto</th>
-                <th>Estoque Atual</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Arroz 5kg</td>
-                <td>8</td>
-            </tr>
+{% block title %}Controle de Estoque{% endblock %}
+
+{% block content %}
+    <h1>Controle de Estoque</h1>
+
+    <div class="form-container" style="background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+        <h2>Registrar Movimentação</h2>
+        <form action="{{ url_for('adicionar_movimento') }}" method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; align-items: end;">
+            
+            <div>
+                <label for="id_produto">Produto:</label>
+                <select id="id_produto" name="id_produto" required>
+                    <option value="" disabled selected>Selecione um produto...</option>
+                    {% for produto in produtos %}
+                        <option value="{{ produto.id_produto }}">{{ produto.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="tipo_mov">Tipo de Movimento:</label>
+                <select id="tipo_mov" name="tipo_mov" required>
+                    <option value="ENTRADA">Entrada</option>
+                    <option value="SAIDA">Saída</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" required>
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+                <label for="motivo">Motivo:</label>
+                <input type="text" id="motivo" name="motivo" placeholder="Ex: Compra de fornecedor, Ajuste de inventário" required>
+            </div>
+
+            <button type="submit" class="btn btn-green" style="grid-column: 1 / -1;">Registrar Movimento</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h2>Histórico de Movimentações</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Motivo</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if movimentos %}
+                    {% for mov in movimentos %}
+                    <tr>
+                        <td data-label="Produto">{{ mov.tb_produto.nome if mov.tb_produto else 'Produto não encontrado' }}</td>
+                        <td data-label="Tipo">
+                            <span style="font-weight: bold; color: {{ '#28a745' if mov.tipo_mov == 'ENTRADA' else '#dc3545' }};">
+                                {{ mov.tipo_mov }}
+                            </span>
+                        </td>
+                        <td data-label="Quantidade">{{ mov.quantidade }}</td>
+                        <td data-label="Motivo">{{ mov.motivo }}</td>
+                        <td data-label="Data">{{ mov.criado_em.split('T')[0] }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="no-results">
+                            Nenhuma movimentação de estoque registrada.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
         </table>
-    </main>
-</body>
-</html>
+    </div>
+{% endblock %}

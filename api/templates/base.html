@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu Sistema{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <header class="header-nav">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-yellow">‹ Voltar ao Painel</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+
+    <main class="main-container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Usa "delegação de eventos" para funcionar com conteúdo que muda (como a busca dinâmica)
+            document.body.addEventListener('submit', function(event) {
+                // Se o formulário enviado tiver a classe .delete-form
+                if (event.target.matches('.delete-form')) {
+                    event.preventDefault(); // Impede o envio normal
+                    const form = event.target;
+                    
+                    Swal.fire({
+                        title: 'Tem certeza?',
+                        text: "Esta ação não poderá ser desfeita!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc3545',
+                        cancelButtonColor: '#ffc107',
+                        confirmButtonText: 'Sim, excluir!',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit(); // Se confirmar, envia o formulário
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 4000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer);
+                            toast.addEventListener('mouseleave', Swal.resumeTimer);
+                        }
+                    });
+
+                    {% for category, message in messages %}
+                        Toast.fire({
+                            icon: '{{ "success" if category == "sucesso" else "error" if category == "erro" else "info" }}',
+                            title: '{{ message }}'
+                        });
+                    {% endfor %}
+                });
+            </script>
+        {% endif %}
+    {% endwith %}
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

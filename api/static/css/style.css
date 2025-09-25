@@ -1,4 +1,6 @@
-/* --- GERAL --- */
+/* ==========================================================================
+   1. ESTILOS GERAIS
+   ========================================================================== */
 body {
     font-family: 'Inter', Arial, sans-serif;
     margin: 0;
@@ -14,17 +16,20 @@ h1, h2, h3 {
 }
 
 a {
-    color: #2e7d32;
     text-decoration: none;
     transition: color 0.2s ease-in-out;
 }
 
-a:hover {
-    color: #1b4a1e;
-    text-decoration: none;
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
-/* --- CABEÇALHO DE NAVEGAÇÃO --- */
+
+/* ==========================================================================
+   2. NAVEGAÇÃO
+   ========================================================================== */
 .header-nav {
     background-color: #ffffff;
     padding: 1rem 2rem;
@@ -34,72 +39,59 @@ a:hover {
     z-index: 1000;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 1rem;
 }
 
-/* --- BOTÕES --- */
+
+/* ==========================================================================
+   3. BOTÕES
+   ========================================================================== */
 .btn {
     padding: 0.6rem 1.2rem;
     border: none;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-family: inherit; /* Garante que <a> e <button> usem a mesma fonte */
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
-/* Verde - Perfil */
-.btn-green {
-    background-color: #2e7d32;
-    color: #fff;
-}
-.btn-green:hover {
-    background-color: #1b5e20;
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Vermelho - Sair */
-.btn-red {
-    background-color: #d9534f;
-    color: #fff;
-}
-.btn-red:hover {
-    background-color: #c9302c;
-}
+/* Cores dos Botões */
+.btn-green { background-color: #28a745; } /* Adicionar */
+.btn-green:hover { background-color: #218838; }
 
-/* Amarelo - Voltar */
-.btn-yellow {
-    background-color: #f0ad4e;
-    color: #fff;
-}
-.btn-yellow:hover {
-    background-color: #ec971f;
-}
+.btn-yellow { background-color: #ffc107; color: #212529; } /* Editar, Voltar */
+.btn-yellow:hover { background-color: #e0a800; }
 
-/* --- CONTAINER PRINCIPAL E CABEÇALHO DE BOAS-VINDAS --- */
-.main-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
-}
+.btn-red { background-color: #dc3545; } /* Excluir, Sair */
+.btn-red:hover { background-color: #c82333; }
 
+.btn-blue { background-color: #007bff; } /* Ações primárias (Pesquisar) */
+.btn-blue:hover { background-color: #0069d9; }
+
+
+/* ==========================================================================
+   4. PAINEL (DASHBOARD)
+   ========================================================================== */
 .welcome-header {
     text-align: center;
     margin-bottom: 2.5rem;
 }
 
-.welcome-header h1 {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-}
-
-.welcome-header p {
-    font-size: 1.1rem;
-    color: #6c757d;
-}
-
-/* --- GRADE DE AÇÕES --- */
 .action-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,6 +105,7 @@ a:hover {
     text-align: left;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    color: black;
 }
 
 .action-card:hover {
@@ -126,12 +119,12 @@ a:hover {
     color: #2e7d32;
 }
 
-.action-card p {
-    color: #6c757d;
-    font-size: 1rem;
-}
 
-/* --- FORMULÁRIOS --- */
+/* ==========================================================================
+   5. FORMULÁRIOS
+   ========================================================================== */
+
+/* Formulários de Autenticação (Login, Cadastro) */
 .auth-container {
     max-width: 420px;
     margin: 5rem auto;
@@ -147,13 +140,14 @@ a:hover {
     margin-bottom: 2rem;
 }
 
-form {
+.auth-container form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-input, select, .form-control {
+/* Estilos gerais para campos de formulário */
+input, select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ced4da;
@@ -161,45 +155,16 @@ input, select, .form-control {
     font-size: 1rem;
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     border-color: #4caf50;
     outline: none;
     box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
 }
 
-button[type="submit"], .btn-primary {
-    padding: 14px;
-    background-color: #4caf50;
-    border: none;
-    color: #fff;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-button[type="submit"]:hover, .btn-primary:hover {
-    background-color: #388e3c;
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-    .header-nav {
-        padding: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .main-container {
-        padding: 0 1rem;
-    }
-    .welcome-header h1 {
-        font-size: 1.8rem;
-    }
-}
-/* --- BARRA DE FERRAMENTAS (TOOLBAR) --- */
+/* Barra de Ferramentas com Pesquisa */
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -217,19 +182,18 @@ button[type="submit"]:hover, .btn-primary:hover {
 
 .search-form input {
     width: 100%;
-    padding: 0.6rem 1rem;
-    border: 1px solid #ced4da;
     border-radius: 8px 0 0 8px; 
-    font-size: 1rem;
     border-right: none;
-    box-sizing: border-box;
 }
 
 .search-form button {
     border-radius: 0 8px 8px 0; 
 }
 
-/* --- TABELAS --- */
+
+/* ==========================================================================
+   6. TABELAS
+   ========================================================================== */
 .table-container {
     background-color: #fff;
     border-radius: 12px;
@@ -257,10 +221,6 @@ th {
     text-transform: uppercase;
 }
 
-td {
-    color: #495057;
-}
-
 tr:last-child td {
     border-bottom: none;
 }
@@ -269,17 +229,18 @@ tr:last-child td {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    justify-content: center; /* Alinha os botões ao centro */
 }
 
 .action-buttons form {
     margin: 0;
+    display: flex;
 }
 
-/* === NOVA REGRA PARA TAMANHO DOS BOTÕES === */
+/* Regra para padronizar tamanho de botões específicos */
 .search-form .btn,
 .action-buttons .btn {
-    min-width: 100px; /* Define uma largura mínima */
-    text-align: center;
+    width: 100px;
 }
 
 .no-results {
@@ -288,7 +249,15 @@ tr:last-child td {
     color: #6c757d;
 }
 
-/* --- RESPONSIVIDADE --- */
+/* Classes utilitárias para alinhamento de texto */
+.text-center {
+    text-align: center;
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVIDADE (TELAS PEQUENAS)
+   ========================================================================== */
 @media (max-width: 768px) {
     .header-nav {
         padding: 1rem;
@@ -299,38 +268,121 @@ tr:last-child td {
         padding: 0 1rem;
     }
 
+    /* Ajusta a barra de ferramentas para empilhar verticalmente */
     .toolbar {
         flex-direction: column;
         align-items: stretch; 
     }
 
-    thead {
+    /* Ajusta o formulário de pesquisa em telas pequenas */
+    .search-form {
+        display: block;
+    }
+    .search-form input {
+        border-radius: 8px;
+        border-right: 1px solid #ced4da;
+        margin-bottom: 0.5rem;
+    }
+    .search-form button {
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    /* Adapta a tabela para o formato de "cards" */
+    .table-container thead {
         display: none; 
     }
-    tr {
+    .table-container tr {
         display: block;
         margin-bottom: 1rem;
         border: 1px solid #e9ecef;
         border-radius: 8px;
         padding: 1rem;
     }
-    td {
+    .table-container td {
         display: block;
         text-align: right; 
         padding: 0.5rem 0;
         border-bottom: 1px dotted #ccc;
     }
-    td:last-child {
+    .table-container td:last-child {
         border-bottom: none;
     }
-    td::before {
+    .table-container td::before {
         content: attr(data-label);
         float: left;
         font-weight: 600;
         text-transform: uppercase;
         font-size: 0.85rem;
     }
+    /* No mobile, os botões já ficam à direita por padrão, então mantemos */
     .action-buttons {
         justify-content: flex-end; 
     }
+}
+
+/* ==========================================================================
+   8. SISTEMA DE NOTIFICAÇÕES (TOASTS)
+   ========================================================================== */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: toast-in 0.5s forwards;
+}
+
+@keyframes toast-in {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toast.hide {
+    animation: toast-out 0.5s forwards;
+}
+
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+
+/* Cores para cada tipo de mensagem */
+.toast-sucesso {
+    background-color: #28a745;
+    border-left: 5px solid #218838;
+}
+
+.toast-erro {
+    background-color: #dc3545;
+    border-left: 5px solid #c82333;
+}
+
+.toast-info {
+    background-color: #17a2b8;
+    border-left: 5px solid #138496;
 }

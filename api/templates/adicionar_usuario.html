@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Usuário{% endblock %}
+
+{% block content %}
+    <div class="auth-container" style="margin-top: 2rem;">
+        <h1>Adicionar Novo Usuário</h1>
+        
+        <form method="POST" action="{{ url_for('adicionar_usuario') }}">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+            <button type="submit" class="btn btn-green" style="width: 100%; padding: 14px; margin-top: 1rem;">Cadastrar Usuário</button>
+            <a href="{{ url_for('gerenciar_usuarios') }}" class="btn btn-yellow" style="width: 100%; padding: 14px;">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Produtos{% endblock %}
+
+{% block content %}
+    <h1>Gerenciar Produtos</h1>
+
+    <div class="toolbar">
+        <form class="search-form" method="GET" action="{{ url_for('gerenciar_produtos') }}">
+            <input type="text" name="q" placeholder="Buscar produto por nome..." value="{{ termo_busca or '' }}">
+            <button type="submit" class="btn btn-blue">Pesquisar</button>
+        </form>
+        <a href="{{ url_for('adicionar_produto') }}" class="btn btn-green">+ Incluir Produto</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if produtos %}
+                    {% for produto in produtos %}
+                    <tr>
+                        <td data-label="Nome">{{ produto.nome }}</td>
+                        <td data-label="Preço">R$ {{ "%.2f"|format(produto.preco|float) }}</td>
+                        <td data-label="Estoque">{{ produto.estoque }}</td>
+                        <td data-label="Ações">
+                            <div class="action-buttons">
+                                <a href="{{ url_for('editar_produto', id_produto=produto.id_produto) }}" class="btn btn-yellow">Editar</a>
+                                
+                                <form class="delete-form" action="{{ url_for('excluir_produto', id_produto=produto.id_produto) }}" method="POST">
+                                    <button type="submit" class="btn btn-red">Excluir</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="no-results">
+                            Nenhum produto encontrado com o termo "{{ termo_busca }}".
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

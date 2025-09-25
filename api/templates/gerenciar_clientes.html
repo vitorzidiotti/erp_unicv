@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="header-nav">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-yellow">‹ Voltar ao Painel</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-red">Sair</a>
+    </header>
+
+    <main class="main-container">
+        <h1>Gerenciar Clientes</h1>
+
+        <div class="toolbar">
+            <form class="search-form" method="GET" action="{{ url_for('gerenciar_clientes') }}">
+                <input type="text" name="q" placeholder="Buscar cliente por nome, email ou CPF/CNPJ..." value="{{ request.args.get('q', '') }}">
+                <button type="submit" class="btn btn-green">Pesquisar</button>
+            </form>
+            <a href="{{ url_for('adicionar_cliente') }}" class="btn btn-green">+</a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if clientes %}
+                        {% for cliente in clientes %}
+                        <tr>
+                            <td data-label="Nome">{{ cliente.nome }}</td>
+                            <td data-label="Email">{{ cliente.email }}</td>
+                            <td data-label="Telefone">{{ cliente.telefone }}</td>
+                            <td data-label="CPF/CNPJ">{{ cliente.cpf_cnpj }}</td>
+                            <td data-label="Ações">
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('editar_cliente', id_cliente=cliente.id_cliente) }}" class="btn btn-yellow">Editar</a>
+                                    <form action="{{ url_for('excluir_cliente', id_cliente=cliente.id_cliente) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este cliente?');">
+                                        <button type="submit" class="btn btn-red">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="no-results">
+                                Nenhum cliente encontrado.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

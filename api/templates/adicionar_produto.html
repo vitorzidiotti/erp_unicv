@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Adicionar Novo Produto</h1>
+        
+        <form method="POST" action="{{ url_for('adicionar_produto') }}">
+            
+            <label for="nome">Nome do Produto:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca">
+
+            <label for="preco">Preço (R$):</label>
+            <input type="number" id="preco" name="preco" step="0.01" min="0" required>
+
+            <button type="submit" class="btn btn-green" style="width: 100%; padding: 14px;">Cadastrar Produto</button>
+            <a href="{{ url_for('gerenciar_produtos') }}" class="btn btn-yellow" style="width: 100%; padding: 14px;">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

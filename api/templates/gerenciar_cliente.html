@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Clientes{% endblock %}
+
+{% block content %}
+    <h1>Gerenciar Clientes</h1>
+
+    <div class="toolbar">
+        <form class="search-form" method="GET" action="{{ url_for('gerenciar_clientes') }}">
+            <input type="text" name="q" placeholder="Buscar cliente por nome ou CPF..." value="{{ termo_busca or '' }}">
+            <button type="submit" class="btn btn-blue">Pesquisar</button>
+        </form>
+        <a href="{{ url_for('adicionar_cliente') }}" class="btn btn-green">+ Adicionar Cliente</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if clientes %}
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td data-label="Nome">{{ cliente.nome }}</td>
+                        <td data-label="Email">{{ cliente.email }}</td>
+                        <td data-label="CPF">{{ cliente.cpf }}</td>
+                        <td data-label="Ações">
+                            <div class="action-buttons">
+                                <a href="{{ url_for('editar_cliente', id_cliente=cliente.id_cliente) }}" class="btn btn-yellow">Editar</a>
+                                <form class="delete-form" action="{{ url_for('excluir_cliente', id_cliente=cliente.id_cliente) }}" method="POST">
+                                    <button type="submit" class="btn btn-red">Excluir</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="no-results">
+                            Nenhum cliente encontrado.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

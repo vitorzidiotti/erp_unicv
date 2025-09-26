@@ -56,43 +56,22 @@ Git
 git clone [https://github.com/seu-usuario/sistema-vendas.git](https://github.com/seu-usuario/sistema-vendas.git)
 cd sistema-vendas
 
-3. Crie e Ative um Ambiente Virtual
-No Windows:
-
-python -m venv venv
-.\venv\Scripts\activate
-
-No macOS/Linux:
-
-python3 -m venv venv
-source venv/bin/activate
-
-4. Instale as Dependências
-Com o ambiente virtual ativado, instale todas as bibliotecas necessárias a partir do arquivo requirements.txt.
-
-pip install -r requirements.txt
-
-5. Configure as Variáveis de Ambiente
-Crie um arquivo chamado .env na raiz do projeto. Este arquivo não deve ser enviado para o GitHub. Adicione suas chaves do Supabase e uma chave secreta para o Flask.
+3. Baixe todas as depedencias e bibliotecas com: pip install Flask
+pip install supabase
+pip install python-dotenv
+pip install bcrypt
 
 # .env
 SUPABASE_URL="[https://sua-url-do-projeto.supabase.co](https://sua-url-do-projeto.supabase.co)"
 SUPABASE_KEY="sua-chave-anon-publica-do-supabase"
 FLASK_SECRET_KEY="crie-uma-chave-secreta-forte-e-aleatoria-aqui"
 
-Onde encontrar as chaves do Supabase?
-
-Vá para o seu projeto no Supabase.
-
-No menu da esquerda, vá em Project Settings (ícone de engrenagem) > API.
-
-Copie a URL e a chave anon public.
-
 6. Execute a Aplicação
 Finalmente, inicie o servidor de desenvolvimento do Flask.
-
-flask --app app run --reload --port 8000
-
+Comando para rodar o projeto: flask --app app run --reload --port 8000
 A aplicação estará rodando em http://127.0.0.1:8000.
 
-Este projeto foi desenvolvido como uma solução prática para gestão de negócios, aplicando as melhores práticas de desenvolvimento web com Flask.
+Figma: https://www.figma.com/design/lzzoA5mhGkm8dCWHeiQS0g/Trabalho-ERP?node-id=1-3&t=OgAA0kFZHOofJHus-1
+Pasta com documentação e DER: https://drive.google.com/drive/folders/1Whs-ltiXjpWv9rvD_A_6cQpILhKXtAGb?usp=sharing
+
+Este projeto foi desenvolvido como uma solução prática para gestão de negócios, aplicando as melhores práticas de desenvolvimento web com Flask e está em versão beta/desenvolvimento, em breve será disponibilizada para teste para os usuários e clientes utilizarem.

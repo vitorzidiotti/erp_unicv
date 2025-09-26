@@ -53,8 +53,8 @@ Python 3.8 ou superior
 Git
 
 2. Clone o Repositório
-git clone [https://github.com/seu-usuario/sistema-vendas.git](https://github.com/seu-usuario/sistema-vendas.git)
-cd sistema-vendas
+git clone https://github.com/vitorzidiotti/erp_unicv/tree/main
+cd api
 
 3. Baixe todas as depedencias e bibliotecas com: pip install Flask
 pip install supabase
